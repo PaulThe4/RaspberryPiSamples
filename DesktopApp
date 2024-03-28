@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Testwith2
+Comment=Run Testwith2 python script
+Exec=/usr/bin/python /home/gsurats1/Desktop/Testwith2.py
+Icon=/home/gsurats1/Pictures/JerryIcon
+Terminal=false
+Type=Application
+Categories=Utility;
