@@ -5,47 +5,51 @@ from datetime import datetime
 dest = '/home/gsurats1/Desktop'
 os.chdir(dest)
 interval = 5
-#cap2 = cv2.VideoCapture(2)
+cap2 = cv2.VideoCapture(2)
 cap = cv2.VideoCapture(0)
-#cap.set(3,640)   
-#cap.set(4,480)  
+cap.set(3,640)   
+cap.set(4,480)  
+cap2.set(3,640)   
+cap2.set(4,480)
 start_time = datetime.now()
 X = cv2.VideoWriter_fourcc(*'XVID')
 width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
 height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
 fps = cap.get(cv2.CAP_PROP_FPS)
 
-#width2 = int(cap2.get(cv2.CAP_PROP_FRAME_WIDTH))
-#height2 = int(cap2.get(cv2.CAP_PROP_FRAME_HEIGHT))
-#fps2 = cap2.get(cv2.CAP_PROP_FPS)
+width2 = int(cap2.get(cv2.CAP_PROP_FRAME_WIDTH))
+height2 = int(cap2.get(cv2.CAP_PROP_FRAME_HEIGHT))
+fps2 = cap2.get(cv2.CAP_PROP_FPS)
 i = 1
 #output = cv2.VideoWriter('Video.avi',X,30.0,(1280,720))
 while True:
 	ret1, frame1 = cap.read()	
-#	ret2, frame2 = cap2.read()	
+	ret2, frame2 = cap2.read()	
 	
-	cv2.imshow('Live',frame1)
-#	cv2.imshow('Live',frame2)
+	cv2.imshow('Live1',frame1)
+	cv2.imshow('Live2',frame2)
 	
 	current_time = datetime.now()
 	time_passed = (current_time - start_time).total_seconds()
 	if time_passed >= interval:
 		timestamp = current_time.strftime("%Y-%m-%d_%H-%M-%S")
 		file_name = 'video_{}.avi'.format(timestamp)
-#		file_name2 = 'video2_{}.avi'.format(timestamp)
+		file_name2 = 'video2_{}.avi'.format(timestamp)
 		output = cv2.VideoWriter(file_name,X,fps,(width,height))
-#		output2 = cv2.VideoWriter(file_name2,X,fps2,(width2,height2))
+		output2 = cv2.VideoWriter(file_name2,X,fps2,(width2,height2))
 		for j in range(150):
 			output.write(frame1)
-	#		output2.write(frame2)
+			output2.write(frame2)
 		output.release()
-	#	output2.release()
+		output2.release()
 		start_time = current_time
 		cap.release()
+		cap2.release()
 		cv2.destroyAllWindows()
 	if cv2.waitKey(1) & 0xFF == ord('q'):
 		break
 #cap.release()
 #cap2.release()
+#cv2.destroyAllWindows()
 #output.release()
 #cv2.destroyAllWindows()
