@@ -7,6 +7,8 @@ os.chdir(dest)
 interval = 5
 #cap2 = cv2.VideoCapture(2)
 cap = cv2.VideoCapture(0)
+#cap.set(3,640)   
+#cap.set(4,480)  
 start_time = datetime.now()
 X = cv2.VideoWriter_fourcc(*'XVID')
 width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
@@ -39,9 +41,11 @@ while True:
 		output.release()
 	#	output2.release()
 		start_time = current_time
+		cap.release()
+		cv2.destroyAllWindows()
 	if cv2.waitKey(1) & 0xFF == ord('q'):
 		break
-cap.release()
+#cap.release()
 #cap2.release()
 #output.release()
-cv2.destroyAllWindows()
+#cv2.destroyAllWindows()
